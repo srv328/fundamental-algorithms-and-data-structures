@@ -3,7 +3,7 @@ this discipline was taught in the 2nd year of my studies. on it, we studied the 
 
 in this repository you can find:
 
-1. doubly linked ring list
+1. double linked ring list
 2. red-black tree
 3. sorting algorithms
 4. searching in a substring
