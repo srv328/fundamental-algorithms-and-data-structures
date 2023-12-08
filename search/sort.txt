@@ -1,0 +1,13 @@
+2 1121 Algoritmov Egor Evgenevich 09.04.1997 Ivanova Diana Severinovich
+6 1121 Di Valentin Yaroslavovich 20.07.1979 Bobrovskij Margarita Ignatevich
+10 1121 Pasko Kseniya Denisovich 14.05.1933 Bondarenko Diana Pavlovich
+5 1123 Dohlik Galina Bogdanovich 10.10.1935 Sheshenya Zhanna Eduardovich
+9 1123 Barbayanov Valentin Yakovlevich 26.12.1999 Kozachko Denis Ignatevich
+7 1125 Makogon Viktoriya Viktorovich 29.09.1982 Teryohin Sofiya Volfovich
+11 1125 Nalimov Alyona Alekseevich 06.10.1993 Tarasov Fyodor Aleksandrovich
+4 1127 Gadyuchka Agnes Filippovich 06.03.2004 Gorbaryov Ruslan Borisovich
+8 1127 Mulyava Grigorij Evgenevich 03.03.1967 Sutugin Oleg Borisovich
+13 1127 Vinogradov Evgenij Tarasovich 21.06.1942 Van Alisa Arkadevich
+3 1129 Sheshenya Yaroslav Anatolevich 16.09.1938 Cyplakov Valentin Anatolevich
+12 1129 Tyukova Leonid Eduardovich 28.01.1993 Kozachko Diana Ignatevich
+14 1150 Mihajlov Mariya Valerevich 13.03.1960 Gogoleva Boris Alekseevich
