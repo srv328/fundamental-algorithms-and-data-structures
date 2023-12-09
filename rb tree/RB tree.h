@@ -1,30 +1,9 @@
 #pragma once
 #include <iostream>
 #include <Windows.h>
-#include "List.h"
 #include <sstream>
-
+#include "List.h"
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-void set_color(char a) {
-	if (a == 'R') SetConsoleTextAttribute(hConsole, 12);
-	else SetConsoleTextAttribute(hConsole, 15);
-}
-
-void print_list(list_elem* root, bool color)
-{
-	if (root != nullptr) {
-		if (color) set_color('B');
-		else set_color('R');
-		list_elem* temp = root;
-		while (temp->next != root) {
-			std::cout << temp->data.sym << temp->data.num << " (" << temp->count << ")";
-			temp = temp->next;
-		}
-		std::cout << temp->data.sym << temp->data.num << " (" << temp->count << ")";
-	}
-	SetConsoleTextAttribute(hConsole, 15);
-}
 
 template <typename T>
 struct tree_elem_generic {
@@ -135,19 +114,19 @@ void insert_balance(tree_elem_generic<T>*& element, tree_elem_generic<T>*& root,
 }
 
 template <typename T>
-tree_elem_generic<T>* insert(tree_elem_generic<T>*& root, tree_elem_generic<T>* nullnode, T data, int index) {
+tree_elem_generic<T>* insert(tree_elem_generic<T>*& root, tree_elem_generic<T>* nullnode, T data) {
 	T key = data;
 	tree_elem_generic<T>* existingElement = search(root, nullnode, key);
 
 	if (existingElement == nullnode) {
-		// РЃР»РµРјРµРЅС‚ СЃ РґР°РЅРЅС‹Рј РєР»СЋС‡РѕРј РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, СЃРѕР·РґР°РµРј РЅРѕРІС‹Р№
+		// Ёлемент с данным ключом не существует, создаем новый
 		tree_elem_generic<T>* element = new tree_elem_generic<T>;
 		element->parent = nullptr;
 		element->left = nullnode;
 		element->right = nullnode;
 		element->color = false;
 		element->list = list_init();
-		list_insert(element->list, index);
+		list_insert(element->list);
 		element->data = key;
 
 		tree_elem_generic<T>* parent_buffer = nullptr;
@@ -173,7 +152,7 @@ tree_elem_generic<T>* insert(tree_elem_generic<T>*& root, tree_elem_generic<T>* 
 		insert_balance(element, root, nullnode);
 	}
 	else {
-		list_insert(existingElement->list, index);
+		list_insert(existingElement->list);
 	}
 	return root;
 }
@@ -269,7 +248,7 @@ void search_between(tree_elem_generic<T>* root, tree_elem_generic<T>* nullnode, 
 }
 
 template <typename T>
-tree_elem_generic<T>* erase(tree_elem_generic<T>*& root, tree_elem_generic<T>* nullnode, T data, int number) {
+tree_elem_generic<T>* erase(tree_elem_generic<T>*& root, tree_elem_generic<T>* nullnode, T data) {
 	if (root != nullnode && root != nullptr) {
 		T key = data;
 		tree_elem_generic<T>* temp = root;
@@ -282,7 +261,7 @@ tree_elem_generic<T>* erase(tree_elem_generic<T>*& root, tree_elem_generic<T>* n
 			else { temp = temp->left; }
 		}
 		if (z == nullnode) return root;
-		if (z->list->next != z->list) remove(z->list, number);
+		if (z->list->next != z->list) remove(z->list);
 		else {
 			y = z;
 			bool y_original_color = y->color;
@@ -311,7 +290,7 @@ tree_elem_generic<T>* erase(tree_elem_generic<T>*& root, tree_elem_generic<T>* n
 				y->right->parent = y;
 				y->color = z->color;
 			}
-			remove(z->list, number);
+			remove(z->list);
 			delete z;
 			if (y_original_color == true) erase_balance(root, nullnode, element);
 		}
@@ -364,29 +343,27 @@ void index_update(tree_elem_generic<T>* root, tree_elem_generic<T>* nullnode, in
 }
 
 template <typename T>
-std::string print(tree_elem_generic<T>* root, tree_elem_generic<T>* nullnode, int h, int ln) {
+void print(tree_elem_generic<T>* root, tree_elem_generic<T>* nullnode, int h, int ln) {
 	if (root != nullnode) {
-		std::string result = "";
-
+		
 		if (root->left != nullnode || root->right != nullnode || root->list != nullptr) {
-			result += print(root->right, nullnode, h + 4, ln);
+			print(root->right, nullnode, h + 4, ln);
 
 			for (int i = 1; i <= h; i++)
-				result += ' ';
-
-			std::stringstream ss;
-			ss << root->data;
-			result += ss.str() + print_list(root->list, root->color);
+				std::cout << ' ';
+			if (root->color) {
+				SetConsoleTextAttribute(hConsole, 15);
+			}
+			else {
+				SetConsoleTextAttribute(hConsole, 12);
+			}
+			std::cout << root->data << ": ";
+			print_list(root->list);
 
 			for (int i = 0; i < ln; i++)
-				result += '\n';
-
-			result += print(root->left, nullnode, h + 4, ln);
+				std::cout << '\n';
+			print(root->left, nullnode, h + 4, ln);
 		}
-
-		return result;
 	}
-	else {
-		return "";
-	}
+	SetConsoleTextAttribute(hConsole, 15);
 }
