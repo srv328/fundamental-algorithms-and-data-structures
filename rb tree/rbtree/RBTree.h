@@ -4,6 +4,28 @@
 #include "List.h"
 #include <sstream>
 
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+void set_color(char a) {
+	if (a == 'R') SetConsoleTextAttribute(hConsole, 12);
+	else SetConsoleTextAttribute(hConsole, 15);
+}
+
+void print_list(list_elem* root, bool color)
+{
+	if (root != nullptr) {
+		if (color) set_color('B');
+		else set_color('R');
+		list_elem* temp = root;
+		while (temp->next != root) {
+			std::cout << temp->data.sym << temp->data.num << " (" << temp->count << ")";
+			temp = temp->next;
+		}
+		std::cout << temp->data.sym << temp->data.num << " (" << temp->count << ")";
+	}
+	SetConsoleTextAttribute(hConsole, 15);
+}
+
 template <typename T>
 struct tree_elem_generic {
 	T data;
