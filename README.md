@@ -9,6 +9,6 @@ in this repository you can find:
 4. searching in a substring
 5. search in array
 6. hash table
-7. graphs
+7. graphs (matrix)
    
 there is a readme file for each structure and algorithm, and for some tasks there is a report in Russian
