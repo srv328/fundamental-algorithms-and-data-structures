@@ -9,8 +9,6 @@ This C++ program implements pattern matching algorithms—Aho-Corasick and Boyer
 - [Usage](#usage)
 - [File Structure](#file-structure)
 - [How It Works](#how-it-works)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
